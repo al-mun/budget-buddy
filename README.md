@@ -1,6 +1,5 @@
-# Getting Started with Create React App
+This is a React project based on my JavaScipt Budget app. I wanted to further my React skills by creating the same application in React.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
