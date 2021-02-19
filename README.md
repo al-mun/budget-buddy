@@ -1,3 +1,14 @@
+# Budget App React
+
+This is the React version of my Budget App that I originally made in JavaScript. It features Hooks, state management, and some conditional rendering.
+
+Currently in progress, still needs expense section input validation, and modify/delete buttons.
+
+I will eventually add local storage. 
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
