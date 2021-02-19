@@ -1,8 +1,3 @@
-
-# A React version of my budget app. In progress.
-
-App is currently not split into components. Will be later on.
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

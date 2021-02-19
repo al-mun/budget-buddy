@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 const App =()=>{
   //useState initializations
-  const [income, setIncome] = useState(0)
+  const [income, setIncome] = useState([])
   const [incomeArray, setIncomeArray] = useState([])
   const [title, setTitle] = useState("")
-  const [expense, setExpense] = useState(0)
+  const [expense, setExpense] = useState([])
   const [expenseArray, setexpenseArray] = useState([])  //where the expense array is stored
 
   //functions
@@ -14,9 +14,15 @@ const App =()=>{
     setIncome(e.target.value)
   }
   const submitIncome=(e)=>{
+    console.log(income.length)
     e.preventDefault()
-    setIncome("")
-    setIncomeArray(parseFloat(income, 10))
+    if(income.length <=0){
+      alert("cannot be blank")
+    }
+    else{
+      setIncome("")
+      setIncomeArray(parseFloat(income, 10))
+    }
   }
   const titleHandler=(e)=>{
     setTitle(e.target.value)
@@ -26,6 +32,7 @@ const App =()=>{
   }
   const submitExpense=(e)=>{
     e.preventDefault()  //stop refresh
+    //insert if statement for input validation
     setTitle("")        //reset textboxes
     setExpense("")   
     let expenseFloat = parseFloat(expense, 10)  //turn string into float
@@ -63,6 +70,7 @@ const difference = ()=>{
           from the income entered and the difference is show in "Left Over". This amount will be given a
           class that makes it red or green depending on if it's positive or negative using the ternary operator.
           </h5>
+          <a href="https://github.com/alejandro-mun/budget-app-react" target="_blank">Link to code in github</a>
         </div>
           <div className="income section">        
             <form className="income-form">
