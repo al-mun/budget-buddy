@@ -59,7 +59,7 @@ h2,p,i,h3, h4{
   place-content: center;
   margin-bottom: 2rem;
 }
-.expense-item{
+.heading{
   color: black;
   text-transform: capitalize;
 }

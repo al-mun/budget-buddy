@@ -14,8 +14,8 @@ const App =()=>{
     setIncome(e.target.value)
   }
   const submitIncome=(e)=>{
-    console.log(income.length)
     e.preventDefault()
+    //input validation
     if(income.length <=0){
       alert("cannot be blank")
     }
@@ -32,12 +32,17 @@ const App =()=>{
   }
   const submitExpense=(e)=>{
     e.preventDefault()  //stop refresh
-    //insert if statement for input validation
-    setTitle("")        //reset textboxes
-    setExpense("")   
-    let expenseFloat = parseFloat(expense, 10)  //turn string into float
-    setexpenseArray([...expenseArray, {id: Math.floor(Math.random() * 1001), title: title, expense: expenseFloat}])  //new array
-    findTotal()  //find the total
+    //input validation
+    if(title.length <=0 || expense.length <=0){
+      alert("cannot be blank")
+    }
+    else{
+      setTitle("")        //reset textboxes
+      setExpense("")   
+      let expenseFloat = parseFloat(expense, 10)  //turn string into float
+      setexpenseArray([...expenseArray, {id: Math.floor(Math.random() * 1001), title: title, expense: expenseFloat}])  //new array
+      findTotal()  //find the total
+    }
   }
 const findTotal = ()=>{
   let total = 0
@@ -53,8 +58,6 @@ const difference = ()=>{
   const difference = incomeArray-findTotal()
   return difference.toFixed(2)
 }
-  //console.log(expenseArray)
-
     return (
       <div className="App">
         <div className="title">
@@ -104,21 +107,20 @@ const difference = ()=>{
           <div className="summary-bg">
           <h3>Summary</h3>
             <div className="summary">
-              <h3 className="expense-item">Income: ${incomeArray}</h3>
-              <h3 className="expense-item">Expenses: ${findTotal()}</h3>
-              <h3 className="expense-item">Left over: <span className={incomeArray-findTotal()> 0 ?'good': 'bad'}>${difference()}</span></h3>
+              <h3 className="heading">Income: ${incomeArray}</h3>
+              <h3 className="heading">Expenses: ${findTotal()}</h3>
+              <h3 className="heading">Left over: <span className={incomeArray-findTotal()> 0 ?'good': 'bad'}>${difference()}</span></h3>
             </div>
           </div>          
         </div>
 
         <div className="expenses-section">
-          
             <div className="expense-categories">
             <h3>Expenses</h3>
               {expenseArray.map(expense=>{
                 return (
                   <div key={expense.id} className="tool-tip">
-                    <p className="expense-item">{expense.title} ${expense.expense}</p>
+                    <p className="heading">{expense.title} ${expense.expense.toFixed(2)}</p>
                     <span className="tool-tip-info">&#123; id: {expense.id} title: {expense.title} amount: {expense.expense} &#125;</span>
                   </div>
                 )
