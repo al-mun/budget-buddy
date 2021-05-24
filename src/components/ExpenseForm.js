@@ -10,7 +10,7 @@ const ExpenseForm = ({title, titleHandler, expense, categoryHandler, expenseHand
           <input type="text" placeholder="Utility bill" className="input-boxes" value={title} onChange={titleHandler}/>
           <p>Amount</p>
           <input type="number" placeholder="50" className="input-boxes" value={expense} onChange={expenseHandler}/>
-          <p>Category (not working yet)</p>
+          <p>Category</p>
           <select className="input-boxes" onChange={categoryHandler}>
             <option value="0"></option>
             <option value="1">Bills</option>

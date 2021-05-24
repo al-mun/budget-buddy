@@ -102,7 +102,6 @@ const App =()=>{
   const deleteItem = (id)=>{
     //create new array and filter it by item id that's not = to the one selected
 
-    //
 
     const newBills = billsArray.filter((item)=> item.id !== id)
     setBillsArray(newBills)
