@@ -7,7 +7,7 @@ import Emergency from "./Categories/Emergency"
 import Savings from "./Categories/Savings"
 
 const ExpenseList = ({bills, grocery,fun,emergency,
-    savings,modifyItem, deleteItem})=>{
+    savings,modifyItem, deleteItem, totalBills, totalGrocery, totalEmerg, totalFun, totalSavings})=>{
   
     return(
         <div className="expenses-section">
@@ -17,23 +17,28 @@ const ExpenseList = ({bills, grocery,fun,emergency,
                 <Bills
                     bills={bills}
                     modifyItem={modifyItem}
-                    deleteItem={deleteItem}/>
+                    deleteItem={deleteItem}
+                    total={totalBills}/>
                 <Groceries
                     grocery={grocery}
                     modifyItem={modifyItem}
-                    deleteItem={deleteItem}/>
+                    deleteItem={deleteItem}
+                    total={totalGrocery}/>
                 <Fun
                     fun={fun}
                     modifyItem={modifyItem}
-                    deleteItem={deleteItem}/>
+                    deleteItem={deleteItem}
+                    total={totalFun}/>
                 <Emergency
                     emergency={emergency}
                     modifyItem={modifyItem}
-                    deleteItem={deleteItem}/>
+                    deleteItem={deleteItem}
+                    total={totalEmerg}/>
                 <Savings
                     savings={savings}
                     modifyItem={modifyItem}
-                    deleteItem={deleteItem}/>
+                    deleteItem={deleteItem}
+                    total={totalSavings}/>
             </div>
         </div>)
 }
