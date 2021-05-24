@@ -77,21 +77,50 @@ const App =()=>{
     else{
       setTitle("")        //reset textboxes
       setExpense("") 
-      let expenseFloat = parseFloat(expense, 10)  //turn string into float
-      let categoryInt = parseInt(category, 10)
-      setExpenseArray([...expenseArray, {id: Math.floor(Math.random() * 1001), title: title, expense: expenseFloat, category: categoryInt}])  //new array
-      totalExpenses()  //find the total
       categorizer(category) //function to categorize based on selection
     }
   }
 
-  const totalExpenses = ()=>{
-      let total = 0
-      total = expenseArray.reduce((acc,curr)=>{
+  const totalBills=()=>{
+    let total = 0
+    total = billsArray.reduce((acc,curr)=>{
          acc +=curr.expense
         return acc
-      }, 0)
-    return total.toFixed(2)
+    }, 0)
+    return total
+  }
+  const totalGrocery=()=>{
+    let total = 0
+    total = groceryArray.reduce((acc,curr)=>{
+         acc +=curr.expense
+        return acc
+    }, 0)
+    return total
+  }
+  const totalFun = ()=>{
+    let total = 0
+    total = funArray.reduce((acc,curr)=>{
+         acc +=curr.expense
+        return acc
+    }, 0)
+    return total
+  }
+  const totalEmergency=()=>{
+    let total = 0
+    total = emergencyArray.reduce((acc,curr)=>{
+         acc +=curr.expense
+        return acc
+    }, 0)
+    return total
+  }
+
+  const totalSavings=()=>{
+    let total = 0
+    total = savingsArray.reduce((acc,curr)=>{
+         acc +=curr.expense
+        return acc
+    }, 0)
+    return total
   }
 
   const modifyItem =(id)=>{
@@ -101,7 +130,6 @@ const App =()=>{
 
   const deleteItem = (id)=>{
     //create new array and filter it by item id that's not = to the one selected
-
 
     const newBills = billsArray.filter((item)=> item.id !== id)
     setBillsArray(newBills)
@@ -117,16 +145,6 @@ const App =()=>{
     
     const newSavings = savingsArray.filter((item)=> item.id !== id)
     setSavingsArray(newSavings)
-
-    //*********Here is where I'm stuck. Since I have individual arrays for each category, I
-    // have to reset the state of each array depending on what is deleted. But I want to update the
-    // Expense total and the Left over in the Summary so I have to reset the state of the master array
-    // called "expenseArray". I tried doing the same thing as with the individual arrays, but I think
-    // it has to do with the different id. ************ */
-    const newExpenseArray = expenseArray.filter((item)=> item.id !==id)
-    setExpenseArray(newExpenseArray)
-
-
   }
 
     return (
@@ -151,7 +169,17 @@ const App =()=>{
         </div>
         <Summary
           incomeArray={incomeArray}
-          totalExpenses={totalExpenses()}
+          bills={billsArray}
+          grocery={groceryArray}
+          fun={funArray}
+          emergency={emergencyArray}
+          savings={savingsArray}
+
+          totalBills={totalBills}
+          totalGrocery={totalGrocery}
+          totalFun={totalFun}
+          totalEmerg={totalEmergency}
+          totalSavings={totalSavings}
           />
         <ExpenseList
           bills={billsArray}
@@ -160,7 +188,14 @@ const App =()=>{
           emergency={emergencyArray}
           savings={savingsArray}
           modifyItem={modifyItem}
-          deleteItem={deleteItem}/>
+          deleteItem={deleteItem}
+
+          totalBills={totalBills}
+          totalGrocery={totalGrocery}
+          totalFun={totalFun}
+          totalEmerg={totalEmergency}
+          totalSavings={totalSavings}
+          />
     </div>
     )
 }
