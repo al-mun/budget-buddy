@@ -1,16 +1,8 @@
 import React from "react"
 
-const Emergency = ({emergency, modifyItem, deleteItem})=>{
+const Emergency = ({emergency, total, modifyItem, deleteItem})=>{
     
-    const totalEmergency=()=>{
-        let total = 0
-        total = emergency.reduce((acc,curr)=>{
-             acc +=curr.expense
-            return acc
-        }, 0)
-        return total.toFixed(2)
-      }
-    
+
     
     return(
         <div className="expense-items expense-categories">
@@ -29,7 +21,7 @@ const Emergency = ({emergency, modifyItem, deleteItem})=>{
                     </div>
                 )
             })}
-        <p>Total: {totalEmergency()} </p>
+        <p>Total: {total().toFixed(2)} </p>
     </div>
     )
 }

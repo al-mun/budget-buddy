@@ -1,15 +1,8 @@
 import React from "react"
 
-const Groceries = ({grocery, modifyItem, deleteItem})=>{
+const Groceries = ({grocery, total, modifyItem, deleteItem})=>{
 
-    const totalGrocery=()=>{
-        let total = 0
-        total = grocery.reduce((acc,curr)=>{
-             acc +=curr.expense
-            return acc
-        }, 0)
-        return total.toFixed(2)
-      }
+
     return(
         <div className="expense-items expense-categories">
             <div className="title">
@@ -27,7 +20,7 @@ const Groceries = ({grocery, modifyItem, deleteItem})=>{
                         </div>
                     )
                 })}
-            <p>Total: {totalGrocery()}</p>
+            <p>Total: {total().toFixed(2)}</p>
         </div>
     )
 }

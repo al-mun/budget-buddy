@@ -1,15 +1,8 @@
 import React from "react"
 
-const Fun = ({fun, modifyItem, deleteItem})=>{
+const Fun = ({fun, total, modifyItem, deleteItem})=>{
 
-    const totalFun = ()=>{
-        let total = 0
-        total = fun.reduce((acc,curr)=>{
-             acc +=curr.expense
-            return acc
-        }, 0)
-        return total.toFixed(2)
-      }
+
     return(
         
                 
@@ -29,7 +22,7 @@ const Fun = ({fun, modifyItem, deleteItem})=>{
                     </div>
                 )
             })}
-        <p>Total: {totalFun()}</p>
+        <p>Total: {total().toFixed(2)}</p>
     </div>
     )
 }

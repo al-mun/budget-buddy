@@ -1,22 +1,15 @@
 import React from "react"
 
-const Bills = ({bills, modifyItem, deleteItem })=>{
+const Bills = ({bills, total, modifyItem, deleteItem })=>{
 
-    const totalBills=()=>{
-        let total = 0
-        total = bills.reduce((acc,curr)=>{
-             acc +=curr.expense
-            return acc
-        }, 0)
-        return total.toFixed(2)
-      }
+    
     return(
         <div className="expense-items expense-categories">
             <div className="title">
                 <h3>Bills</h3>
             </div>
             {bills.map(bill=>{
-                    return( // do I clean this up? how can I map over the whole list while categorizing
+                    return(
                         <div key={bill.id} className="item-details">
                             <p>{bill.title}</p>
                             <p>${bill.expense.toFixed(2)}</p> 
@@ -27,7 +20,7 @@ const Bills = ({bills, modifyItem, deleteItem })=>{
                         </div>
                     )
                 })}
-            <p>Total: {totalBills()}</p>
+            <p>Total: {total().toFixed(2)}</p>
 
         </div>
     )
