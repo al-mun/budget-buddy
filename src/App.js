@@ -94,36 +94,40 @@ const App =()=>{
     return total.toFixed(2)
   }
 
-
-
   const modifyItem =(id)=>{
     //console.log(expenseArray)
     //console.log(billsArray)
-    const newExpenseArray = expenseArray.filter((item)=> item.id !==id)
-    console.log(newExpenseArray)
-
   }
 
   const deleteItem = (id)=>{
     //create new array and filter it by item id that's not = to the one selected
-    // const newBills = billsArray.filter((item)=> item.id !== id)
-    // setBillsArray(newBills)
 
-    // const newGrocery = groceryArray.filter((item)=> item.id !== id)
-    // setGroceryArray(newGrocery)
+    //
 
-    // const newFun = funArray.filter((item)=> item.id !== id)
-    // setFunArray(newFun)
-
-    // const newEmerg = emergencyArray.filter((item)=> item.id !== id)
-    // setEmergencyArray(newEmerg)
-    
-    // const newSavings = savingsArray.filter((item)=> item.id !== id)
-    // setSavingsArray(newSavings)
-    const newExpenseArray = expenseArray.filter((item)=> item.id !==id)
-    setExpenseArray(newExpenseArray)
     const newBills = billsArray.filter((item)=> item.id !== id)
     setBillsArray(newBills)
+
+    const newGrocery = groceryArray.filter((item)=> item.id !== id)
+    setGroceryArray(newGrocery)
+
+    const newFun = funArray.filter((item)=> item.id !== id)
+    setFunArray(newFun)
+
+    const newEmerg = emergencyArray.filter((item)=> item.id !== id)
+    setEmergencyArray(newEmerg)
+    
+    const newSavings = savingsArray.filter((item)=> item.id !== id)
+    setSavingsArray(newSavings)
+
+    //*********Here is where I'm stuck. Since I have individual arrays for each category, I
+    // have to reset the state of each array depending on what is deleted. But I want to update the
+    // Expense total and the Left over in the Summary so I have to reset the state of the master array
+    // called "expenseArray". I tried doing the same thing as with the individual arrays, but I think
+    // it has to do with the different id. ************ */
+    const newExpenseArray = expenseArray.filter((item)=> item.id !==id)
+    setExpenseArray(newExpenseArray)
+
+
   }
 
     return (
