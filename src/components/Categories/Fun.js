@@ -4,7 +4,7 @@ const Fun = ({fun, modifyItem, deleteItem})=>{
 
     const totalFun = ()=>{
         let total = 0
-        total = fun.reduce(function(acc,curr){
+        total = fun.reduce((acc,curr)=>{
              acc +=curr.expense
             return acc
         }, 0)

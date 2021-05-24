@@ -4,7 +4,7 @@ const Bills = ({bills, modifyItem, deleteItem })=>{
 
     const totalBills=()=>{
         let total = 0
-        total = bills.reduce(function(acc,curr){
+        total = bills.reduce((acc,curr)=>{
              acc +=curr.expense
             return acc
         }, 0)
@@ -15,7 +15,6 @@ const Bills = ({bills, modifyItem, deleteItem })=>{
             <div className="title">
                 <h3>Bills</h3>
             </div>
-            
             {bills.map(bill=>{
                     return( // do I clean this up? how can I map over the whole list while categorizing
                         <div key={bill.id} className="item-details">

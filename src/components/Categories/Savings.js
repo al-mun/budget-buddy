@@ -4,7 +4,7 @@ const Savings = ({savings, modifyItem, deleteItem})=>{
     
     const totalSavings=()=>{
         let total = 0
-        total = savings.reduce(function(acc,curr){
+        total = savings.reduce((acc,curr)=>{
              acc +=curr.expense
             return acc
         }, 0)

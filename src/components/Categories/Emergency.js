@@ -4,7 +4,7 @@ const Emergency = ({emergency, modifyItem, deleteItem})=>{
     
     const totalEmergency=()=>{
         let total = 0
-        total = emergency.reduce(function(acc,curr){
+        total = emergency.reduce((acc,curr)=>{
              acc +=curr.expense
             return acc
         }, 0)
