@@ -6,8 +6,9 @@ import Fun from "./Categories/Fun"
 import Emergency from "./Categories/Emergency"
 import Savings from "./Categories/Savings"
 
-const ExpenseList = ({bills, grocery,fun,emergency,
-    savings,modifyItem, deleteItem, totalBills, totalGrocery, totalEmerg, totalFun, totalSavings})=>{
+const ExpenseList = ({modifyOverlay, modifyButton, titleHandler,bills, grocery,fun,emergency,
+    savings,modifyItem, deleteItem, totalBills, totalGrocery, totalEmerg, totalFun, totalSavings, 
+    submitModify, expenseHandler})=>{
   
     return(
         <div className="expenses-section">
@@ -18,7 +19,14 @@ const ExpenseList = ({bills, grocery,fun,emergency,
                     bills={bills}
                     modifyItem={modifyItem}
                     deleteItem={deleteItem}
-                    total={totalBills}/>
+                    total={totalBills}
+                    modifyOverlay={modifyOverlay}
+                    title={titleHandler}
+                    submitExpense={submitModify}
+                    titleHandler={titleHandler}
+                    expenseHandler={expenseHandler}
+                    submitModify={submitModify}
+                    />
                 <Groceries
                     grocery={grocery}
                     modifyItem={modifyItem}
