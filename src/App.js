@@ -141,7 +141,7 @@ const App =()=>{
 
     //change overlay to modify
     setModifyOverlay(!modifyOverlay)
-    //fill in the form with previous information
+
   }
 
   const deleteItem = (id)=>{
