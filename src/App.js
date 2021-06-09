@@ -21,15 +21,14 @@ const App =()=>{
   const [emergencyArray, setEmergencyArray] = useState([])
   const [savingsArray, setSavingsArray] = useState([])
 
-  const [modifyStateB, setModifyStateB] = useState([])
-  const [modifyStateG, setModifyStateG] = useState([])
-  const [modifyStateF, setModifyStateF] = useState([])
-  const [modifyStateE, setModifyStateE] = useState([])
-  const [modifyStateS, setModifyStateS] = useState([])
+  // const [modifyStateB, setModifyStateB] = useState(billsArray)
+  // const [modifyStateG, setModifyStateG] = useState([])
+  // const [modifyStateF, setModifyStateF] = useState([])
+  // const [modifyStateE, setModifyStateE] = useState([])
+  // const [modifyStateS, setModifyStateS] = useState([])
 
   const [modifyOverlay, setModifyOverlay] = useState(false)
-  const [modifyButton, setModifyButton] = useState("Modify")
-
+  const [modify, setModify] = useState(0)
 
 
   //functions
@@ -123,7 +122,6 @@ const App =()=>{
     }, 0)
     return total
   }
-
   const totalSavings=()=>{
     let total = 0
     total = savingsArray.reduce((acc,curr)=>{
@@ -132,13 +130,17 @@ const App =()=>{
     }, 0)
     return total
   }
+
   const submitModify = (id)=>{
     
-    console.log("hello")
+    console.log()
   }
 
   const modifyItem =(id)=>{
-
+    //set modify = to id clicked
+    setModify(id)
+    console.log(modify)
+    console.log(modifyOverlay)
     //change overlay to modify
     setModifyOverlay(!modifyOverlay)
 
@@ -199,6 +201,7 @@ const App =()=>{
           />
         <ExpenseList
           modifyOverlay={modifyOverlay}
+          modify={modify}
           bills={billsArray}
           category={category}
           grocery={groceryArray}

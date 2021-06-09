@@ -71,10 +71,9 @@ h3{
 }
 .item{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20px, 69px));
 }
-.item-overlay{
-  display: grid;
+.item-details-invisible{
+  display: none;
 }
 .item-details{
   display: grid;
@@ -82,7 +81,7 @@ h3{
   place-content: center;
 }
 .item-details-bg{
-  display: none;
+  display: grid;
 }
 .btn{
   cursor: pointer;
@@ -98,11 +97,10 @@ h3{
   background-color: rgb(6, 130, 168);
 }
 .modify-overlay-visible{
-  display: none;
+  display: block;
 }
 .modify-overlay{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(10px, 16rem));
+  display: none;
 }
 
 .heading{
