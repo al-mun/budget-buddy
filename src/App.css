@@ -80,6 +80,7 @@ h3{
   grid-template-columns: repeat(auto-fit, minmax(20px, 69px));
   place-content: center;
 }
+
 .item-details-bg{
   display: grid;
 }
@@ -151,6 +152,10 @@ h3{
   background-clip: padding-box;
   border: 1px solid var(--mainWhite);
   border-radius: .25rem;
+}
+.modify-box{
+  width: 3.8rem;
+
 }
 .button{
   background-color: white;

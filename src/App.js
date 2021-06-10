@@ -21,14 +21,15 @@ const App =()=>{
   const [emergencyArray, setEmergencyArray] = useState([])
   const [savingsArray, setSavingsArray] = useState([])
 
-  // const [modifyStateB, setModifyStateB] = useState(billsArray)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  // const [modifyStateB, setModifyStateB] = useState({title, expense})
   // const [modifyStateG, setModifyStateG] = useState([])
   // const [modifyStateF, setModifyStateF] = useState([])
   // const [modifyStateE, setModifyStateE] = useState([])
   // const [modifyStateS, setModifyStateS] = useState([])
 
-  const [modifyOverlay, setModifyOverlay] = useState(false)
-  const [modify, setModify] = useState(0)
+  //const [modifyOverlay, setModifyOverlay] = useState(false)
 
 
   //functions
@@ -131,19 +132,56 @@ const App =()=>{
     return total
   }
 
-  const submitModify = (id)=>{
+
+  const modify = (id, e)=>{
+    setActiveIndex(id)
+    //setTitle(e.target.value)
     
-    console.log()
   }
+  const cancel = ()=>{
+    setActiveIndex(0)
+}
 
-  const modifyItem =(id)=>{
-    //set modify = to id clicked
-    setModify(id)
-    console.log(modify)
-    console.log(modifyOverlay)
-    //change overlay to modify
-    setModifyOverlay(!modifyOverlay)
+const [modTitle, setModTitle] = useState("")
+const [modExpense, setModExpense] = useState(0)
+const [modCategory, setModCategory] = useState(0)
 
+const modTitleHandler = (e)=>{
+  setModTitle(e.target.value)
+}
+const modExpenseHandler =(e)=>{
+  setModExpense(e.target.value)
+}
+const modCatHandler=(e)=>{
+  setModCategory(e.target.value)
+}
+const modCategorizer=()=>{
+  let randomId = Math.floor(Math.random() * 1001)
+  let cat = parseInt(modCategory, 10)
+  let amount = parseFloat(modExpense)
+  if(cat === 1){
+    setBillsArray([...billsArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
+  }
+  else if(cat===2){
+    setGroceryArray([...groceryArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
+  }
+  else if(cat===3){
+    setFunArray([...funArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
+  }
+  else if(cat ===4){
+    setEmergencyArray([...emergencyArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
+  }
+  else if(cat ===5){
+    setSavingsArray([...savingsArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
+  }
+}
+
+const submitModify = (id, e)=>{
+    let amount = parseFloat(modExpense)
+    //console.log(amount)
+
+    modCategorizer(category)
+  
   }
 
   const deleteItem = (id)=>{
@@ -200,20 +238,20 @@ const App =()=>{
           totalSavings={totalSavings}
           />
         <ExpenseList
-          modifyOverlay={modifyOverlay}
+          modTitleHandler={modTitleHandler}
+          modExpenseHandler={modExpenseHandler}
           modify={modify}
+          cancel={cancel}
           bills={billsArray}
           category={category}
           grocery={groceryArray}
           fun={funArray}
           emergency={emergencyArray}
           savings={savingsArray}
-          modifyItem={modifyItem}
+         
           deleteItem={deleteItem}
-          title={titleHandler}
+          
           submitModify={submitModify}
-          titleHandler={titleHandler}
-          expenseHandler={expenseHandler}
 
           totalBills={totalBills}
           totalGrocery={totalGrocery}
