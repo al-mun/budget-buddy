@@ -1,16 +1,17 @@
 import React, {useState} from "react"
 
-const Bills = ({title, bills, total, deleteItem, submitModify,titleHandler})=>{
+const Bills = ({ bills, total, deleteItem, submitModify, modTitleHandler, modExpenseHandler})=>{
 
-const [activeIndex, setActiveIndex]=useState(0)
+const [activeIndex, setActiveIndex] = useState(0)
 
-const modifyItem = (id)=>{
+const modify = (id, e)=>{
     setActiveIndex(id)
-    console.log(id)
-}
-const cancel = ()=>{
+    //setTitle(e.target.value) 
+  }
+  const cancel = ()=>{
     setActiveIndex(0)
 }
+
 
     return(
         <div className="expense-items expense-categories">
@@ -25,14 +26,14 @@ const cancel = ()=>{
                                 <p>${bill.expense.toFixed(2)}</p>
                                 
                                 <div className="buttons">                                    
-                                    <button className="btn modify" onClick={()=>modifyItem(bill.id)}>Modify</button>
+                                    <button className="btn modify" onClick={()=>modify(bill.id)}>Modify</button>
                                     <button className="btn" onClick={()=>deleteItem(bill.id)}>Delete</button> 
                                 </div>
 
                             </div>
                                 <div className={activeIndex === bill.id ? "item-details": "item-details-invisible"}>                     
-                                    <input type="text" value={bill.title} onChange={titleHandler} className="input-boxes"/>
-                                    <input type="text" value={bill.expense} onChange={titleHandler}/>
+                                    <input type="text" defaultValue={bill.title} onChange={modTitleHandler}  className="modify-box"/>
+                                    <input type="text" defaultValue={bill.expense} onChange={modExpenseHandler}className="modify-box"/>
                                     <select>
                                         <option value="1">Bills</option>
                                         <option value="2">Grocery/Household</option>
@@ -41,8 +42,8 @@ const cancel = ()=>{
                                         <option value="5">Savings</option>
                                     </select>
                                     <div className="buttons">                                    
-                                        <button className="btn modify" onClick={()=>submitModify()}>Submit</button>
-                                        <button className="btn" key={bill.id} onClick={()=>cancel()}>Cancel</button>
+                                        <button className="btn modify" onClick={submitModify}>Submit</button>
+                                        <button className="btn" key={bill.id} onClick={cancel}>Cancel</button>
                                     </div>
                                 </div>
                             
