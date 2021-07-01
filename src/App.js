@@ -1,266 +1,270 @@
-import './App.css';
-import Income from "./components/Income"
-import React, { useState } from 'react';
-import ExpenseForm from './components/ExpenseForm';
-import Summary from "./components/Summary"
-import ExpenseList from './components/ExpenseList';
+import React, { useState } from "react";
+import AddSectionForm from "./AddSectionForm";
+import ProjectSections from "./ProjectSections";
+import ProjectIncomeSection from "./ProjectIncomeSection"
+import Summary from "./Summary"
+import {GiHamburgerMenu} from "react-icons/gi"
+import "./styles.css";
 
-const App =()=>{
-  //useState initializations
-  //income section of app
-  const [incomeText, setIncomeText] = useState("")
-  const [income, setIncome] = useState(0)
-  //enter an expense section
-  const [title, setTitle] = useState("")
-  const [expense, setExpense] = useState([])
-  const [category, setCategory] = useState(0)
-  //categories arrays
-  const [billsArray, setBillsArray] = useState([])
-  const [groceryArray, setGroceryArray] = useState([])
-  const [funArray, setFunArray] = useState([])
-  const [emergencyArray, setEmergencyArray] = useState([])
-  const [savingsArray, setSavingsArray] = useState([])
+const App=()=> {
+  const [sections, setSections] = useState([
+    {
+      id: 1,
+      sectionName: "Bills",
+      expenses: [
+        { id: 1, desc: "Utility ", amount: 1.00, editting: false }]
+    },
+    {
+      id: 2,
+      sectionName: "Grocery/Household",
+      expenses: [
+        { id: 1, desc: "Food ", amount: 1.00, editting: false }]
+    },
+    {
+      id: 3,
+      sectionName: "Fun",
+      expenses: [
+        { id: 1, desc: "Movies ", amount: 1.00, editting: false }]
+    }
+  ]);
 
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [totalExpenses, setTotalExpenses] = useState()
+  const [incomeSection, setIncomeSection] = useState([
+    {
+      id: 1,
+      name: "Income",
+      incomes: [{ id: 1, desc: "Pay 1 ", amount: 1.00, editting: false }]
+    }
+  ]);
 
-  // const [modifyStateB, setModifyStateB] = useState({title, expense})
-  // const [modifyStateG, setModifyStateG] = useState([])
-  // const [modifyStateF, setModifyStateF] = useState([])
-  // const [modifyStateE, setModifyStateE] = useState([])
-  // const [modifyStateS, setModifyStateS] = useState([])
-
-  //const [modifyOverlay, setModifyOverlay] = useState(false)
-
-
-  //functions
-  //set the income entered by the user as income
-  const incomeHandler=(e)=>{
-    setIncomeText(e.target.value)
-  }
-  const submitIncome=(e)=>{
-    e.preventDefault()
-    //input validation
-    if(incomeText.length <=0){
-      alert("cannot be blank")
-    }
-    else{
-      setIncomeText("")
-      setIncome(parseFloat(incomeText, 10))  //parse income 
-    }
-  }
-  
-  const titleHandler=(e)=>{
-    setTitle(e.target.value)
-  }
-  const expenseHandler=(e)=>{
-    setExpense(e.target.value)
-  }
-  const categoryHandler=(e)=>{
-    setCategory(e.target.value)
-  }
-  const categorizer=()=>{
-    let randomId = Math.floor(Math.random() * 1001)
-    let cat = parseInt(category, 10)
-    let amount = parseFloat(expense)
-    if(cat === 1){
-      setBillsArray([...billsArray, {id: randomId, title: title, expense: amount, category: cat}])
-    }
-    else if(cat===2){
-      setGroceryArray([...groceryArray, {id: randomId, title: title, expense: amount, category: cat}])
-    }
-    else if(cat===3){
-      setFunArray([...funArray, {id: randomId, title: title, expense: amount, category: cat}])
-    }
-    else if(cat ===4){
-      setEmergencyArray([...emergencyArray, {id: randomId, title: title, expense: amount, category: cat}])
-    }
-    else if(cat ===5){
-      setSavingsArray([...savingsArray, {id: randomId, title: title, expense: amount, category: cat}])
-    }
-  }
-  const submitExpense=(e)=>{
-    e.preventDefault()  //stop refresh
-    //input validation - if blank, alert.
-    if(title.length <=0 || expense.length <=0 || category===0){
-      alert("cannot be blank")
-    }
-    else{
-      setTitle("")        //reset textboxes
-      setExpense("") 
-      categorizer(category) //function to categorize based on selection
-    }
-  }
-
-  const totalBills=()=>{
+  const addUpExpenses =()=>{
     let total = 0
-    total = billsArray.reduce((acc,curr)=>{
-         acc +=curr.expense
-        return acc
+    total = sections.expenses.reduce((acc,curr)=>{
+      acc+=curr.amount
+      return acc
     }, 0)
-    return total
-  }
-  const totalGrocery=()=>{
-    let total = 0
-    total = groceryArray.reduce((acc,curr)=>{
-         acc +=curr.expense
-        return acc
-    }, 0)
-    return total
-  }
-  const totalFun = ()=>{
-    let total = 0
-    total = funArray.reduce((acc,curr)=>{
-         acc +=curr.expense
-        return acc
-    }, 0)
-    return total
-  }
-  const totalEmergency=()=>{
-    let total = 0
-    total = emergencyArray.reduce((acc,curr)=>{
-         acc +=curr.expense
-        return acc
-    }, 0)
-    return total
-  }
-  const totalSavings=()=>{
-    let total = 0
-    total = savingsArray.reduce((acc,curr)=>{
-         acc +=curr.expense
-        return acc
-    }, 0)
-    return total
+    return total.toFixed(2)
+    //setExpensesTotal(total)
   }
 
+  const addNewIncome = (sectionId, incomeName, amount) => {
+    let income = parseFloat(amount)
+    let newIncome = {
+      id: keyRandomizer(),
+      desc: incomeName,
+      amount: income,
+      editting: false
+    };
+    let allSectionsCopy = JSON.parse(JSON.stringify(incomeSection));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    sectionToUpdate.incomes = [...sectionToUpdate.incomes, newIncome];
+    setIncomeSection([...allSectionsCopy]);
+  };
 
-  const modify = (id, e)=>{
-    setActiveIndex(id)
-    //setTitle(e.target.value)
+  const removeIncome=(sectionId, incomeId )=>{
+    //find the correct object
+    let allSectionsCopy = JSON.parse(JSON.stringify(incomeSection));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];  //the category that needs to be updated
+    const removedIncome = sectionToUpdate.incomes.filter(income=>income.id!==incomeId)
+    sectionToUpdate.incomes = [...removedIncome] //return the section with filtered expenses
+    setIncomeSection([...allSectionsCopy])
+
+  }
+  const removeExpenseSection=(sectionId)=>{
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];  //the index of the section to be deleted
+    const sectionRemoved = allSectionsCopy.filter((section)=>section.id!==sectionToUpdate.id)
+    setSections([...sectionRemoved])
+    //console.log(sectionToUpdate)
+  }
+  const removeExpense=(sectionId,expenseId)=>{
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];  //the category that needs to be updated
+    const removedExpense = sectionToUpdate.expenses.filter(expense=>expense.id!==expenseId)
+    sectionToUpdate.expenses = [...removedExpense] //return the section with filtered expenses
+    setSections([...allSectionsCopy])
+  }
+
+  const addNewExpense = (sectionId, expenseName, amount) => {
+    let expense = parseFloat(amount)
+    let newExpense = {
+      id: keyRandomizer(),
+      desc: expenseName,
+      amount: expense,
+      editting: false
+    };
+
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    sectionToUpdate.expenses = [...sectionToUpdate.expenses, newExpense];
+    setSections([...allSectionsCopy]);
+  };
+
+  const updateIncomeDesc = (desc, sectionId, incomeId) => {
+    let allSectionsCopy = JSON.parse(JSON.stringify(incomeSection));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let incomeIndex = sectionToUpdate.incomes.findIndex(income => income.id === incomeId);
+    let incomeToUpdate = sectionToUpdate.incomes[incomeIndex];
+    incomeToUpdate.desc = desc;
+    setIncomeSection([...allSectionsCopy]);
+  };
+
+  const updateIncomeAmount=(amount, sectionId, incomeId)=>{
+    let income = parseFloat(amount)
+    let allSectionsCopy = JSON.parse(JSON.stringify(incomeSection));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let incomeIndex = sectionToUpdate.incomes.findIndex(income => income.id === incomeId);
+    let incomeToUpdate = sectionToUpdate.incomes[incomeIndex];
+    incomeToUpdate.amount = income;
+    setIncomeSection([...allSectionsCopy]);
+  }
+  const updateExpenseAmount = (amount, sectionId, expenseId) => {
+    let expense = parseFloat(amount)
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let expenseIndex = sectionToUpdate.expenses.findIndex(expense => expense.id === expenseId);
+    let expenseToUpdate = sectionToUpdate.expenses[expenseIndex];
     
-  }
-  const cancel = ()=>{
-    setActiveIndex(0)
-}
+    expenseToUpdate.amount = expense;
 
-const [modTitle, setModTitle] = useState("")
-const [modExpense, setModExpense] = useState(0)
-const [modCategory, setModCategory] = useState(0)
+    setSections([...allSectionsCopy]);
+  };
 
-const modTitleHandler = (e)=>{
-  setModTitle(e.target.value)
-}
-const modExpenseHandler =(e)=>{
-  setModExpense(e.target.value)
-}
-const modCatHandler=(e)=>{
-  setModCategory(e.target.value)
-}
-const modCategorizer=()=>{
-  let randomId = Math.floor(Math.random() * 1001)
-  let cat = parseInt(modCategory, 10)
-  let amount = parseFloat(modExpense)
-  if(cat === 1){
-    setBillsArray([...billsArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
-  }
-  else if(cat===2){
-    setGroceryArray([...groceryArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
-  }
-  else if(cat===3){
-    setFunArray([...funArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
-  }
-  else if(cat ===4){
-    setEmergencyArray([...emergencyArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
-  }
-  else if(cat ===5){
-    setSavingsArray([...savingsArray, {id: randomId, title: modTitle, expense: amount, category: cat}])
-  }
-}
+  const toggleIncomeEditMode = (incomeId, taskId) => {
+    let allSectionsCopy = JSON.parse(JSON.stringify(incomeSection));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === incomeId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let taskIndex = sectionToUpdate.incomes.findIndex(task => task.id === taskId);
+    let taskToUpdate = sectionToUpdate.incomes[taskIndex];
+    taskToUpdate.editting = !taskToUpdate.editting;
+    setIncomeSection([...allSectionsCopy]);
+  };
 
-const submitModify = (id, e)=>{
-    let amount = parseFloat(modExpense)
-    //console.log(amount)
+  const toggleExpenseEditMode = (sectionId, expenseId) => {
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let expenseIndex = sectionToUpdate.expenses.findIndex(expense => expense.id === expenseId);
+    let expenseToUpdate = sectionToUpdate.expenses[expenseIndex];
+    expenseToUpdate.editting = !expenseToUpdate.editting;
+    setSections([...allSectionsCopy]);
+  };
 
-    modCategorizer(category)
-  
-  }
+  const addNewSection = sectionName => {
+    let newSection = {
+      id: keyRandomizer(),
+      sectionName: sectionName,
+      expenses: []
+    };
+    setSections([...sections, newSection]);
+  };
 
-  const deleteItem = (id)=>{
-    //create new array and filter it by item id that's not = to the one selected
-
-    const newBills = billsArray.filter((item)=> item.id !== id)
-    setBillsArray(newBills)
-
-    const newGrocery = groceryArray.filter((item)=> item.id !== id)
-    setGroceryArray(newGrocery)
-
-    const newFun = funArray.filter((item)=> item.id !== id)
-    setFunArray(newFun)
-
-    const newEmerg = emergencyArray.filter((item)=> item.id !== id)
-    setEmergencyArray(newEmerg)
+  const updateExpenseDesc = (desc, sectionId, expenseId) => {
+    let allSectionsCopy = JSON.parse(JSON.stringify(sections));
+    let sectionIndex = allSectionsCopy.findIndex(
+      section => section.id === sectionId
+    );
+    let sectionToUpdate = allSectionsCopy[sectionIndex];
+    let expenseIndex = sectionToUpdate.expenses.findIndex(expense => expense.id === expenseId);
+    let expenseToUpdate = sectionToUpdate.expenses[expenseIndex];
     
-    const newSavings = savingsArray.filter((item)=> item.id !== id)
-    setSavingsArray(newSavings)
-  }
+    expenseToUpdate.desc = desc;
 
-    return (
-      <div className="App">
-        <div className="title">
-          <h1>Budget App React</h1>
+    setSections([...allSectionsCopy]);
+  };
+
+  const keyRandomizer = () => {
+    let randomKey = "";
+    let characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 5; i++) {
+      randomKey += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return randomKey;
+  };
+
+  return (
+    <div className="App">
+      {/* <ProjectSummary
+        //addUpExpenses={addUpExpenses}
+        incomeSection={incomeSection}
+        sections={sections}
+      /> */}
+      
+      <header>
+        <div>
+          <div className="header-logo">
+            <h2>Budget Buddy</h2>
+            <i>Work in Progress</i>
+          </div>
+          <button className="sign-in">
+            <p>Sign in</p>
+          </button>
         </div>
-        <div className="forms-bg">
-
-          <Income 
-            income={incomeText}
-            incomeHandler={incomeHandler}
-            submitIncome={submitIncome}/>
-          <ExpenseForm 
-            title={title}
-            titleHandler={titleHandler}
-            expense={expense}
-            categoryHandler={categoryHandler}
-            expenseHandler={expenseHandler}
-            submitExpense={submitExpense}
-          />
-        </div>
-        <Summary
-          income={income}
-          bills={billsArray}
-          grocery={groceryArray}
-          fun={funArray}
-          emergency={emergencyArray}
-          savings={savingsArray}
-
-          totalBills={totalBills}
-          totalGrocery={totalGrocery}
-          totalFun={totalFun}
-          totalEmerg={totalEmergency}
-          totalSavings={totalSavings}
-          />
-        <ExpenseList
-          modTitleHandler={modTitleHandler}
-          modExpenseHandler={modExpenseHandler}
-          modify={modify}
-          cancel={cancel}
-          bills={billsArray}
-          category={category}
-          grocery={groceryArray}
-          fun={funArray}
-          emergency={emergencyArray}
-          savings={savingsArray}
-         
-          deleteItem={deleteItem}
-          
-          submitModify={submitModify}
-
-          totalBills={totalBills}
-          totalGrocery={totalGrocery}
-          totalFun={totalFun}
-          totalEmerg={totalEmergency}
-          totalSavings={totalSavings}
-          />
+      </header>
+      
+      <div className="income-section">
+        <section className="hero">
+          <h2>Keeping track of your spending?</h2>
+          <p>Enter your income to start budgeting. Then start adding expenses or categories.</p>
+        </section>
+        <ProjectIncomeSection
+          incomeSection={incomeSection}
+          addNewIncome={addNewIncome}
+          removeIncome={removeIncome}
+          updateIncomeDesc={updateIncomeDesc}
+          updateIncomeAmount={updateIncomeAmount}
+          toggleIncomeEditMode={toggleIncomeEditMode}/>
+      </div>
+      <Summary
+        incomeSection={incomeSection}
+        sections={sections}
+      />
+      <div className="add-section">
+        <AddSectionForm 
+        addNewSection={addNewSection}/>
+      </div>
+        <ProjectSections
+          sections={sections}
+          addNewExpense={addNewExpense}
+          removeExpense={removeExpense}
+          removeExpenseSection={removeExpenseSection}
+          updateExpenseDesc={updateExpenseDesc}
+          updateExpenseAmount={updateExpenseAmount}
+          toggleExpenseEditMode={toggleExpenseEditMode}
+        /> 
     </div>
-    )
+  );
 }
 
-export default App;
+export default App

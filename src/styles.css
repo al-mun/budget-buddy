@@ -1,0 +1,180 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  margin-bottom: 10rem;
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+}
+
+body{
+  background: linear-gradient(
+  145deg,rgb(167, 244, 246) 0%, rgb(4, 29, 89) 100%) no-repeat fixed
+}
+h4{
+  color: rgb(92, 92, 92);
+  font-size: 1.4rem;
+}
+h5{
+  font-size: 1.2rem;
+}
+p{
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+header{
+  display: grid;
+  grid-template-columns: auto;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+.header-logo{
+  text-align: left;
+  margin: 2rem;
+  color: rgb(255, 255, 255);
+}
+.nav{
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .nav{
+    display: block;
+  }
+}
+.hero{
+  display: grid;
+  margin: auto;
+  color: rgb(255, 255, 255);
+  text-align: left; 
+}
+.hero p{
+  text-align: left;
+}
+
+input{
+  border-radius: 3px;
+  border: 1px solid rgb(110, 110, 110);
+}
+.expenses{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 300px));
+  place-content: center;
+  gap: 1rem;
+}
+.expense-section{
+  display: grid;
+  grid-template-rows: repeat(auto-fit,minmax(20px, 45px));
+  align-items: center;
+}
+.income-section{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 350px));
+  border-radius: 4px;
+  place-content: center;
+  gap: 2rem;
+}
+.summary{
+  display: grid;
+}
+.summary h4{
+  color: white;
+}
+.totals{
+  display: grid;
+  place-content: center;
+  color: white;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 180px));
+}
+.section {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(172, 172, 172);
+  box-shadow: 1px 1px 10px rgb(47, 47, 47);
+  transition: all 0.4s ease-out;
+}
+button{
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  width: 2rem;
+  color: teal;
+  transition: all 0.3s linear;
+}
+button:hover{
+  background-color: #80dee7;
+}
+.close-section{
+  width: 2rem;
+  display: grid;
+  justify-content: right;
+  color: teal;
+  margin-top: 9px;
+  margin-right: 5px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.add-button{
+  width: 6rem;
+  background-color: rgb(100, 216, 237);
+  color: black;
+  margin-top: 0.5rem;
+}
+.sign-in{
+  background-color: #00ccdd;
+  width: 4rem;
+  height: 4rem;
+  color: black;
+  display: none;
+}
+.income-item{
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+.income-btns{
+  display: grid;
+  grid-template-columns: 2rem 2rem;
+  
+}
+.item {
+display: grid;
+flex-wrap: wrap;
+grid-template-columns: auto 5rem 2rem auto;
+background-color: white;
+border-radius: 5px;
+place-content: center;
+}
+
+.add-section{
+  display: grid;
+  display: grid;
+  height: 50px;
+  place-self: center;
+  justify-items: center;
+}
+
+.remove-section{
+  transform: rotate(90deg);
+}
+.add-section input{
+  width: 15rem;
+}
+.add-section-button {
+  background: #00ccdd;
+  border: 2px solid #000000;
+}
+.total{
+  padding: 1rem;
+}
+.submit-form{
+  margin: auto;
+  padding: 0.2rem;
+  display: grid;
+  justify-items: center;
+}
