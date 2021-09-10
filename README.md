@@ -1,6 +1,6 @@
 # Budget app React
 
-https://www.munoza.com/budget-react/
+https://www.munoza.com/budget-buddy/
 
 
 # Getting Started with Create React App
