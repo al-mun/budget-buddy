@@ -12,19 +12,19 @@ const App=()=> {
       id: 1,
       sectionName: "Bills",
       expenses: [
-        { id: 1, desc: "Utility", amount: 1.00, editting: false }]
+        { id: 1, desc: "Utility", amount: 50.00, editting: false }]
     },
     {
       id: 2,
       sectionName: "Grocery/Household",
       expenses: [
-        { id: 1, desc: "Food", amount: 1.00, editting: false }]
+        { id: 1, desc: "Food", amount: 100.00, editting: false }]
     },
     {
       id: 3,
       sectionName: "Fun",
       expenses: [
-        { id: 1, desc: "Movies", amount: 1.00, editting: false }]
+        { id: 1, desc: "Movies", amount: 75.00, editting: false }]
     }
     ]);
 
@@ -32,7 +32,7 @@ const App=()=> {
     {
       id: 1,
       name: "Income",
-      incomes: [{ id: 1, desc: "Pay 1", amount: 1.00, editting: false }]
+      incomes: [{ id: 1, desc: "Pay 1", amount: 1000.00, editting: false }]
     }
   ]);
   const addNewIncome = (sectionId, incomeName, amount) => {
