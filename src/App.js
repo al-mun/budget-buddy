@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import AddSectionForm from "./AddSectionForm";
-import ProjectSections from "./ProjectSections";
-import ProjectIncomeSection from "./ProjectIncomeSection"
-import Summary from "./Summary"
-import {GiHamburgerMenu} from "react-icons/gi"
-import "./styles.css";
+import AddSectionForm from "./addSection/AddSectionForm";
+import ProjectSections from "./expenses/ProjectSections";
+import ProjectIncomeSection from "./income/ProjectIncomeSection"
+import Summary from "./summary/Summary"
+import Sticky from "react-sticky-el";
+import "./App.css";
 
 const App=()=> {
   const [sections, setSections] = useState([
@@ -12,41 +12,29 @@ const App=()=> {
       id: 1,
       sectionName: "Bills",
       expenses: [
-        { id: 1, desc: "Utility ", amount: 1.00, editting: false }]
+        { id: 1, desc: "Utility", amount: 1.00, editting: false }]
     },
     {
       id: 2,
       sectionName: "Grocery/Household",
       expenses: [
-        { id: 1, desc: "Food ", amount: 1.00, editting: false }]
+        { id: 1, desc: "Food", amount: 1.00, editting: false }]
     },
     {
       id: 3,
       sectionName: "Fun",
       expenses: [
-        { id: 1, desc: "Movies ", amount: 1.00, editting: false }]
+        { id: 1, desc: "Movies", amount: 1.00, editting: false }]
     }
-  ]);
+    ]);
 
-  const [totalExpenses, setTotalExpenses] = useState()
   const [incomeSection, setIncomeSection] = useState([
     {
       id: 1,
       name: "Income",
-      incomes: [{ id: 1, desc: "Pay 1 ", amount: 1.00, editting: false }]
+      incomes: [{ id: 1, desc: "Pay 1", amount: 1.00, editting: false }]
     }
   ]);
-
-  const addUpExpenses =()=>{
-    let total = 0
-    total = sections.expenses.reduce((acc,curr)=>{
-      acc+=curr.amount
-      return acc
-    }, 0)
-    return total.toFixed(2)
-    //setExpensesTotal(total)
-  }
-
   const addNewIncome = (sectionId, incomeName, amount) => {
     let income = parseFloat(amount)
     let newIncome = {
@@ -148,7 +136,7 @@ const App=()=> {
     let sectionToUpdate = allSectionsCopy[sectionIndex];
     let expenseIndex = sectionToUpdate.expenses.findIndex(expense => expense.id === expenseId);
     let expenseToUpdate = sectionToUpdate.expenses[expenseIndex];
-    
+
     expenseToUpdate.amount = expense;
 
     setSections([...allSectionsCopy]);
@@ -195,7 +183,7 @@ const App=()=> {
     let sectionToUpdate = allSectionsCopy[sectionIndex];
     let expenseIndex = sectionToUpdate.expenses.findIndex(expense => expense.id === expenseId);
     let expenseToUpdate = sectionToUpdate.expenses[expenseIndex];
-    
+
     expenseToUpdate.desc = desc;
 
     setSections([...allSectionsCopy]);
@@ -215,12 +203,8 @@ const App=()=> {
 
   return (
     <div className="App">
-      {/* <ProjectSummary
-        //addUpExpenses={addUpExpenses}
-        incomeSection={incomeSection}
-        sections={sections}
-      /> */}
-      
+
+
       <header>
         <div>
           <div className="header-logo">
@@ -232,11 +216,14 @@ const App=()=> {
           </button>
         </div>
       </header>
-      
+
       <div className="income-section">
         <section className="hero">
-          <h2>Keeping track of your spending?</h2>
-          <p>Enter your income to start budgeting. Then start adding expenses or categories.</p>
+          <h2>Want to keep track of your spending?</h2>
+          <p>To start budgeting, enter your monthly income. 
+            Then start adding expenses or categories.</p>
+          <p>The secret to budgeting is to categorize your expenses, 
+            and set limits for each. </p>
         </section>
         <ProjectIncomeSection
           incomeSection={incomeSection}
@@ -246,12 +233,15 @@ const App=()=> {
           updateIncomeAmount={updateIncomeAmount}
           toggleIncomeEditMode={toggleIncomeEditMode}/>
       </div>
-      <Summary
-        incomeSection={incomeSection}
-        sections={sections}
-      />
+      <Sticky>
+        <Summary
+          sections={sections}
+          incomeSection={incomeSection}
+        />
+      </Sticky>
+
       <div className="add-section">
-        <AddSectionForm 
+        <AddSectionForm
         addNewSection={addNewSection}/>
       </div>
         <ProjectSections
@@ -262,7 +252,7 @@ const App=()=> {
           updateExpenseDesc={updateExpenseDesc}
           updateExpenseAmount={updateExpenseAmount}
           toggleExpenseEditMode={toggleExpenseEditMode}
-        /> 
+        />
     </div>
   );
 }
