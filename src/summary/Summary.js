@@ -41,9 +41,18 @@ const Summary = ({sections, incomeSection})=>{
       <section className="summary">
           <h4>Summary</h4>
           <div className="totals">
-            <h5>Income ${addAllIncomes()}</h5>
-            <h5>Expenses ${addAllExpenses()}</h5>
-            <h5>Remaining ${remaining()}</h5>
+            <div className="totals-rows">
+              <h5>Income</h5>
+              <h5>${addAllIncomes()}</h5>
+            </div>
+            <div className="totals-rows">
+              <h5>Expenses</h5>
+              <h5>${addAllExpenses()}</h5>
+            </div>
+            <div className="totals-rows">
+              <h5>Remaining</h5>
+              <h5 className={remaining()<0 ? "bad":"good"}>${remaining()}</h5>
+            </div>
           </div>
       </section>
     )
