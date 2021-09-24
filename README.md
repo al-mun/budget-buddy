@@ -1,4 +1,4 @@
-# Budget app React
+# Budgeting Application
 
 https://www.munoza.com/budgetbuddy/
 
