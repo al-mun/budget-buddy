@@ -157,6 +157,7 @@ button:hover{
   border-radius: 5px;
   place-content: center;
   align-items: baseline;
+  height: 2rem;
 }
 
 .add-section{

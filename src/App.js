@@ -203,8 +203,6 @@ const App=()=> {
 
   return (
     <div className="App">
-
-
       <header>
         <div>
           <div className="header-logo">
