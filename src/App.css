@@ -45,8 +45,8 @@ header{
 }
 
 input{
-  border-radius: 3px;
   border: 1px solid rgb(110, 110, 110);
+  height: 25px;
 }
 .expenses{
   display: grid;
@@ -60,6 +60,7 @@ input{
   grid-template-rows: repeat(auto-fit,minmax(20px, 45px));
   align-items: center;
 }
+
 .income-section{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20px, 350px));
@@ -67,6 +68,11 @@ input{
   place-content: center;
   gap: 2rem;
   margin-bottom: 1rem;
+}
+.categories-title{
+  font-size: 2rem;
+  color: rgb(58, 58, 58);
+  margin-bottom: 1px
 }
 .summary{
   display: grid;
@@ -125,6 +131,9 @@ button:hover{
   cursor: pointer;
   transition: all 0.3s linear;
 }
+
+
+
 
 .add-button{
   width: 6rem;
