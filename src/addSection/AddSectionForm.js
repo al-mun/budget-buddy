@@ -7,6 +7,7 @@ const AddSectionForm=(props)=> {
   };
   const [error, setError] = useState("")
 
+  
   const handleSubmit = e => {
       e.preventDefault();
       if(text.length > 0){
@@ -19,8 +20,10 @@ const AddSectionForm=(props)=> {
       }
   };
 
+  
   return (
     <form onSubmit={handleSubmit} className="add-section">
+      <h2 className="categories-title">Categories</h2>
       <h5 className="bad">{error}</h5>
       <input
         onChange={handleChange}
