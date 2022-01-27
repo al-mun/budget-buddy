@@ -17,6 +17,7 @@ const Section = ({
 }) => {
   const [newExpenseName, setExpenseName] = useState("");
   const [newExpenseAmount, setExpenseAmount] = useState("")
+  const [deleteAnimation, setDeleteAnimation] = useState(false)
 
   const addUpExpenses=()=>{
     let total = 0
@@ -64,9 +65,9 @@ const Section = ({
   };
 
   return (
-    <div className="section">
+    <div className={deleteAnimation ? "close-animation" : "section"}>
       
-      <span title="Close Category" onClick={()=>removeExpenseSection(section.id)} className="close-section"><GrClose/></span>
+      <span title="Close Category" onClick={()=>{removeExpenseSection(section.id); setDeleteAnimation(true);}} className="close-section"><GrClose/></span>
       <div className="section-title">
         <h4>{section.sectionName}</h4>
       </div>
