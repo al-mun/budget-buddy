@@ -35,6 +35,8 @@ const App=()=> {
       incomes: [{ id: 1, desc: "Pay 1", amount: 1000.00, editting: false }]
     }
   ]);
+
+
   const addNewIncome = (sectionId, incomeName, amount) => {
     let income = parseFloat(amount)
     let newIncome = {
@@ -72,6 +74,9 @@ const App=()=> {
     let sectionToUpdate = allSectionsCopy[sectionIndex];  //the index of the section to be deleted
     const sectionRemoved = allSectionsCopy.filter((section)=>section.id!==sectionToUpdate.id)
     setSections([...sectionRemoved])
+
+    
+
     //console.log(sectionToUpdate)
   }
   const removeExpense=(sectionId,expenseId)=>{
