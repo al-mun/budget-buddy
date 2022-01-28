@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {AiFillEdit} from "react-icons/ai"
 import {FaTrashAlt} from "react-icons/fa"
 import {MdDone} from "react-icons/md"
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const IncomeSection = ({
   incomeSection,
@@ -12,7 +13,6 @@ const IncomeSection = ({
 })=>{
   const [newIncomeName, setIncomeName] = useState("");
   const [newIncomeAmount, setIncomeAmount] = useState("");
-  
 
   const addUpIncomes=()=>{
     let total = 0
@@ -53,8 +53,10 @@ const IncomeSection = ({
   return (
     <div>
       <h4>{incomeSection.name}</h4>
-      {incomeSection.incomes.map(income => {
-        return !income.editting ? (
+      <TransitionGroup>
+      {incomeSection.incomes.map(income => (
+        <CSSTransition key={income.id} timeout={500} classNames="card-animation">
+        {!income.editting ? (
           <div className="income-item" key={income.id}>
             <p>{income.desc}</p>
             <p>{income.amount ? `$${income.amount.toFixed(2)}`: `$0.00`}</p>
@@ -66,7 +68,6 @@ const IncomeSection = ({
                 <FaTrashAlt/>
               </button>
             </div>
-
           </div>
         ) : (
           <form className="item">
@@ -83,8 +84,12 @@ const IncomeSection = ({
             <MdDone/>
             </button>
           </form>
-        );
-      })}
+        )
+      }
+      </CSSTransition>
+      ))
+      }
+      </TransitionGroup>
       <div className="total">
         <p><b>Total: ${addUpIncomes()}</b></p>
       </div>
