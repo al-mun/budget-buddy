@@ -3,8 +3,8 @@ import {AiFillEdit} from "react-icons/ai"
 import {FaTrashAlt} from "react-icons/fa"
 import {MdDone} from "react-icons/md"
 import {GrClose} from "react-icons/gr"
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import {CSSTransition, TransitionGroup} from "react-transition-group"
 
 const Section = ({
   section,
@@ -67,16 +67,14 @@ const Section = ({
 
   return (
     <div className="section">
-      
       <span title="Close Category" onClick={()=>removeExpenseSection(section.id)} className="close-section"><GrClose/></span>
       <div className="section-title">
         <h4>{section.sectionName}</h4>
       </div>
-      {section.expenses.map(expense => {
-
-        return !expense.editting ? (
-          
-
+      <TransitionGroup>
+      {section.expenses.map(expense => (
+        <CSSTransition key={expense.id} timeout={500} classNames="card-animation">
+        {!expense.editting ? (
           <div className="expense-section" key={expense.id}>
             <div className="item" key={expense.id}>
             <p>{expense.desc}</p>
@@ -89,8 +87,6 @@ const Section = ({
             </button>
           </div>
           </div>
-          
-        
         ) : (
           <section className="item">
             <input
@@ -106,14 +102,12 @@ const Section = ({
               <MdDone/>
             </button>
           </section>
-          
-        );
-       
+            )
+          }
+          </CSSTransition>
+        ))
       }
-      
-      )}
-      
-
+      </TransitionGroup>
       <div className="total">
         <p><b>Total: $ {addUpExpenses()}</b></p>
       </div>
@@ -138,7 +132,9 @@ const Section = ({
           
         </p>
       </form>
+      
     </div>
+    
     
   );
   

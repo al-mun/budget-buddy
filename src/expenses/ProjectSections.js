@@ -1,14 +1,16 @@
 import React from "react";
 import Section from "./Section";
+import {CSSTransition, TransitionGroup} from "react-transition-group"
 
 function ProjectSections(props) {
   const createSections = () => {
     const { sections,addNewExpense, toggleExpenseEditMode, updateExpenseDesc,
-      updateExpenseAmount,removeExpenseSection, removeExpense } = props;
+      updateExpenseAmount, removeExpenseSection, removeExpense } = props;
 
-    return sections.map(section => {
-      return (
-          <div key={section.id}>
+    return (
+      <TransitionGroup className="expenses">
+      {sections.map(section => (
+        <CSSTransition key={section.id} timeout={500} classNames="card-animation">
             <Section
                 section={section}
                 //addAllExpenses={addAllExpenses}
@@ -19,12 +21,14 @@ function ProjectSections(props) {
                 updateExpenseAmount={updateExpenseAmount}
                 toggleExpenseEditMode={toggleExpenseEditMode}
               />
-          </div>
-      );
-    });
+          </CSSTransition>
+      )
+    )}
+    </TransitionGroup>
+    )
   };
 
-  return <div className="expenses">{createSections()}</div>;
+  return <div>{createSections()}</div>;
 
 }
 export default ProjectSections;
