@@ -22,7 +22,7 @@ const App=()=> {
     },
     {
       id: 3,
-      sectionName: "Fun",
+      sectionName: "Entertainment",
       expenses: [
         { id: 1, desc: "Movies", amount: 75.00, editting: false }]
     }
@@ -209,15 +209,15 @@ const App=()=> {
   return (
     <div className="App">
       <header>
-        <div>
+       
           <div className="header-logo">
-            <h2>Budget Buddy</h2>
+            <h1>Budget Buddy</h1>
             <i>Work in Progress</i>
           </div>
           <button className="sign-in">
             <p>Sign in</p>
           </button>
-        </div>
+        
       </header>
 
       <div className="income-section">
@@ -236,7 +236,7 @@ const App=()=> {
           updateIncomeAmount={updateIncomeAmount}
           toggleIncomeEditMode={toggleIncomeEditMode}/>
       </div>
-      <Sticky>
+      <Sticky> 
         <Summary
           sections={sections}
           incomeSection={incomeSection}

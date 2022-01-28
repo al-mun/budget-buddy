@@ -19,15 +19,17 @@ p{
 }
 
 header{
-  display: grid;
-  grid-template-columns: auto;
+  max-width: 1500px;
   height: 5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+ 
 }
 .header-logo{
-  text-align: left;
+  display: grid;
+  place-content: center;
   margin: 2rem;
   color: rgb(255, 255, 255);
+  max-width: 1500px;
 }
 .nav{
   display: none;
@@ -35,10 +37,9 @@ header{
 
 .hero{
   display: grid;
-  margin: auto;
   color: rgb(255, 255, 255);
   text-align: left; 
-  top: 0;
+  align-self: baseline;
 }
 .hero p{
   text-align: left;
@@ -131,8 +132,21 @@ button:hover{
   cursor: pointer;
   transition: all 0.3s linear;
 }
+.card-animation-enter{
+  opacity: 0;
+}
+.card-animation-enter-active{
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+.card-animation-exit{
+  opacity: 1;
+}
 
-
+.card-animation-exit-active{
+  opacity: 0;
+  transition: opacity 500ms linear;
+}
 
 
 .add-button{
