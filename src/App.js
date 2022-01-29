@@ -4,6 +4,7 @@ import ProjectSections from "./expenses/ProjectSections";
 import ProjectIncomeSection from "./income/ProjectIncomeSection"
 import Summary from "./summary/Summary"
 import Sticky from "react-sticky-el";
+import {FaMoneyBillWave} from "react-icons/fa"
 import "./App.css";
 
 const App=()=> {
@@ -211,8 +212,15 @@ const App=()=> {
       <header>
        
           <div className="header-logo">
-            <h1>Budget Buddy</h1>
-            <i>Work in Progress</i>
+            <div>
+              <h1>Budget Buddy</h1>
+              <i>Work in Progress</i>
+            </div>
+            <div>
+              <FaMoneyBillWave id="logo"/>
+            </div>
+            
+            
           </div>
           <button className="sign-in">
             <p>Sign in</p>
