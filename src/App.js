@@ -212,7 +212,7 @@ const App=()=> {
       <header>
        
           <div className="header-logo">
-            <div>
+            <div className="header-title">
               <h1>Budget Buddy</h1>
               <i>Work in Progress</i>
             </div>
