@@ -27,10 +27,13 @@ header{
 .header-logo{
   display: grid;
   grid-template-columns: auto auto;
-  place-content: center;
+  place-content: baseline;
   margin: 2rem;
   color: rgb(255, 255, 255);
   max-width: 1500px;
+}
+.header-title{
+  color: rgb(0, 91, 114);
 }
 #logo{
   color: rgb(0, 91, 114);
