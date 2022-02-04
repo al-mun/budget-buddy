@@ -70,6 +70,8 @@ const Section = ({
       <span title="Close Category" onClick={()=>removeExpenseSection(section.id)} className="close-section"><GrClose/></span>
       <div className="section-title">
         <h4>{section.sectionName}</h4>
+        <button className=""><AiFillEdit/></button>
+        
       </div>
       <TransitionGroup>
       {section.expenses.map(expense => (
