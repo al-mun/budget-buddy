@@ -37,7 +37,6 @@ const App=()=> {
     }
   ]);
 
-
   const addNewIncome = (sectionId, incomeName, amount) => {
     let income = parseFloat(amount)
     let newIncome = {
@@ -75,9 +74,6 @@ const App=()=> {
     let sectionToUpdate = allSectionsCopy[sectionIndex];  //the index of the section to be deleted
     const sectionRemoved = allSectionsCopy.filter((section)=>section.id!==sectionToUpdate.id)
     setSections([...sectionRemoved])
-
-    
-
     //console.log(sectionToUpdate)
   }
   const removeExpense=(sectionId,expenseId)=>{
@@ -218,8 +214,6 @@ const App=()=> {
             <div>
               <FaMoneyBillWave id="logo"/>
             </div>
-            
-            
           </div>
           <button className="sign-in">
             <p>Sign in</p>
