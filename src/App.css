@@ -33,7 +33,13 @@ header{
   max-width: 1500px;
 }
 .header-title{
+  display: grid;
+  grid-template-rows: 2.5rem 2.5rem;
   color: rgb(0, 91, 114);
+}
+.header-title h2{
+  font-weight: 400;
+  font-style: italic;
 }
 #logo{
   color: rgb(0, 91, 114);
