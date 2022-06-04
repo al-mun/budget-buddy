@@ -210,6 +210,7 @@ const App=()=> {
           <div className="header-logo">
             <div className="header-title">
               <h1>Budget Buddy</h1>
+              <h2>Expense Tracker</h2>
             </div>
             <div>
               <FaMoneyBillWave id="logo"/>
