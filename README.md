@@ -1,7 +1,5 @@
 # Budgeting Application
 
-https://www.munoza.com/budgetbuddy/
-
 
 # Getting Started with Create React App
 
